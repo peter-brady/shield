@@ -1,0 +1,23 @@
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% set title = "Password Manager"|t %}
+
+{% if not currentUser.admin %}
+{% exit 404 %}
+{% endif %}
+
+{% set navItems = {
+settings: { label: "General Settings"|t, url: url('password-manager') },
+constraints: { label: "Password Constraints"|t, url: url('password-manager/constraints') },
+expiration: { label: "Password Expiration"|t, url: url('password-manager/expiration') },
+emails: { label: "Emails"|t, url:    url('password-manager/emails') }
+} %}
+
+{% set docTitle = 'foo' %}
+
+{% block sidebar %}
+<nav>
+    {% include "_includes/nav" with { items: navItems, selectedItem: selectedNavItem } only %}
+</nav>
+{% endblock %}
