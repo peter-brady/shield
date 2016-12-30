@@ -5,7 +5,8 @@
 {% block content %}
 
 <form id="settings-form" method="post" class="centered" accept-charset="UTF-8" data-saveshortcut>
-    <input type="hidden" name="action" value="passwordControl/saveSettings">
+    <input type="hidden" name="action" value="passwordControl/settings/save">
+    <input type="hidden" name="settingsForm" value="constraints">
     {{ getCsrfInput() }}
 
     <h2>{{ 'Password Constraints'|t }}</h2>

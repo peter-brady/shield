@@ -5,26 +5,41 @@ namespace Craft;
 
 class PasswordControlPlugin extends BasePlugin
 {
+    /**
+     * @return null|string
+     */
     public function getName()
     {
         return Craft::t('Password Control');
     }
 
+    /**
+     * @return string
+     */
     public function getVersion()
     {
         return '1.0.0';
     }
 
+    /**
+     * @return string
+     */
     public function getDeveloper()
     {
         return 'Peter Brady';
     }
 
+    /**
+     * @return string
+     */
     public function getDeveloperUrl()
     {
         return 'https://www.peterbrady.co.uk';
     }
 
+    /**
+     * @return array
+     */
     protected function defineSettings()
     {
         return array(
@@ -38,6 +53,9 @@ class PasswordControlPlugin extends BasePlugin
         );
     }
 
+    /**
+     * @return string
+     */
     public function getSettingsHtml()
     {
         return craft()->templates->render('passwordcontrol/settings', array(
@@ -58,12 +76,12 @@ class PasswordControlPlugin extends BasePlugin
      */
     public function registerCpRoutes()
     {
-        return [
-            'password-control' => ['action' => 'passwordControl/settings'],
-            'password-control/constraints' => ['action' => 'passwordControl/constraintSettings'],
-            'password-control/history' => ['action' => 'passwordControl/historySettings'],
-            'password-control/expiration' => ['action' => 'passwordControl/expirationSettings'],
-            'password-control/emails' => ['action' => 'passwordControl/emailsSettings'],
-        ];
+        return array(
+            'password-control' => array('action' => 'passwordControl/settings/general'),
+            'password-control/constraints' => array('action' => 'passwordControl/settings/constraints'),
+            'password-control/history' => array('action' => 'passwordControl/settings/history'),
+            'password-control/expiration' => array('action' => 'passwordControl/settings/expiration'),
+            'password-control/emails' => array('action' => 'passwordControl/settings/emails'),
+        );
     }
 }
