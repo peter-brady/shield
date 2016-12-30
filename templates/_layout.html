@@ -1,10 +1,10 @@
 {% extends "_layouts/cp" %}
 {% import "_includes/forms" as forms %}
 
-{% set title = "Password Manager"|t %}
+{% set title = "Password Control"|t %}
 
 {% set crumbs = [
-{ label: "Password Manager"|t, url: url('password-manager') }
+{ label: "Password Control"|t, url: url('password-control') }
 ] %}
 
 {% if not currentUser.admin %}
@@ -12,11 +12,11 @@
 {% endif %}
 
 {% set navItems = {
-settings: { label: "General"|t, url: url('password-manager') },
-constraints: { label: "Constraints"|t, url: url('password-manager/constraints') },
-history: { label: "History"|t, url: url('password-manager/history') },
-expiration: { label: "Expiration"|t, url: url('password-manager/expiration') },
-emails: { label: "Emails"|t, url:    url('password-manager/emails') }
+settings: { label: "General"|t, url: url('password-control') },
+constraints: { label: "Constraints"|t, url: url('password-control/constraints') },
+history: { label: "History"|t, url: url('password-control/history') },
+expiration: { label: "Expiration"|t, url: url('password-control/expiration') },
+emails: { label: "Emails"|t, url:    url('password-control/emails') }
 } %}
 
 {% set docTitle = 'foo' %}

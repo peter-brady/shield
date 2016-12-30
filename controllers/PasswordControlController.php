@@ -2,47 +2,47 @@
 
 namespace Craft;
 
-class PasswordManagerController extends BaseController
+class PasswordControlController extends BaseController
 {
 
     public function actionSettings()
     {
-        $plugin = craft()->plugins->getPlugin('passwordmanager');
+        $plugin = craft()->plugins->getPlugin('passwordcontrol');
         $settings = $plugin->getSettings();
 
-        $this->renderTemplate('passwordmanager/settings', array('settings' => $settings));
+        $this->renderTemplate('passwordcontrol/settings', array('settings' => $settings));
     }
 
     public function actionConstraintSettings()
     {
-        $plugin = craft()->plugins->getPlugin('passwordmanager');
+        $plugin = craft()->plugins->getPlugin('passwordcontrol');
         $settings = $plugin->getSettings();
 
-        $this->renderTemplate('passwordmanager/settings_constraints', array('settings' => $settings));
+        $this->renderTemplate('passwordcontrol/settings_constraints', array('settings' => $settings));
     }
 
     public function actionExpirationSettings()
     {
-        $plugin = craft()->plugins->getPlugin('passwordmanager');
+        $plugin = craft()->plugins->getPlugin('passwordcontrol');
         $settings = $plugin->getSettings();
 
-        $this->renderTemplate('passwordmanager/settings_expiration', array('settings' => $settings));
+        $this->renderTemplate('passwordcontrol/settings_expiration', array('settings' => $settings));
     }
 
     public function actionEmailsSettings()
     {
-        $plugin = craft()->plugins->getPlugin('passwordmanager');
+        $plugin = craft()->plugins->getPlugin('passwordcontrol');
         $settings = $plugin->getSettings();
 
-        $this->renderTemplate('passwordmanager/settings_emails', array('settings' => $settings));
+        $this->renderTemplate('passwordcontrol/settings_emails', array('settings' => $settings));
     }
 
     public function actionHistorySettings()
     {
-        $plugin = craft()->plugins->getPlugin('passwordmanager');
+        $plugin = craft()->plugins->getPlugin('passwordcontrol');
         $settings = $plugin->getSettings();
 
-        $this->renderTemplate('passwordmanager/settings_history', array('settings' => $settings));
+        $this->renderTemplate('passwordcontrol/settings_history', array('settings' => $settings));
     }
 
     /**
@@ -65,7 +65,7 @@ class PasswordManagerController extends BaseController
         $settings['constraint_punctuation'] = craft()->request->getPost('constraint_punctuation');
         $settings['constraint_numbers'] = craft()->request->getPost('constraint_numbers');
 
-        if (craft()->plugins->savePluginSettings(craft()->plugins->getPlugin('passwordmanager'), $settings))
+        if (craft()->plugins->savePluginSettings(craft()->plugins->getPlugin('passwordcontrol'), $settings))
         {
             craft()->userSession->setNotice(Craft::t('Password settings saved.'));
             $this->redirectToPostedUrl();

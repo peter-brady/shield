@@ -3,11 +3,11 @@
 namespace Craft;
 
 
-class PasswordManagerPlugin extends BasePlugin
+class PasswordControlPlugin extends BasePlugin
 {
     public function getName()
     {
-        return Craft::t('Password Manager');
+        return Craft::t('Password Control');
     }
 
     public function getVersion()
@@ -40,7 +40,7 @@ class PasswordManagerPlugin extends BasePlugin
 
     public function getSettingsHtml()
     {
-        return craft()->templates->render('passwordmanager/settings', array(
+        return craft()->templates->render('passwordcontrol/settings', array(
             'settings' => $this->getSettings()
         ));
     }
@@ -50,7 +50,7 @@ class PasswordManagerPlugin extends BasePlugin
      */
     public function getSettingsUrl()
     {
-        return 'password-manager';
+        return 'password-control';
     }
 
     /**
@@ -59,11 +59,11 @@ class PasswordManagerPlugin extends BasePlugin
     public function registerCpRoutes()
     {
         return [
-            'password-manager' => ['action' => 'passwordManager/settings'],
-            'password-manager/constraints' => ['action' => 'passwordManager/constraintSettings'],
-            'password-manager/history' => ['action' => 'passwordManager/historySettings'],
-            'password-manager/expiration' => ['action' => 'passwordManager/expirationSettings'],
-            'password-manager/emails' => ['action' => 'passwordManager/emailsSettings'],
+            'password-control' => ['action' => 'passwordControl/settings'],
+            'password-control/constraints' => ['action' => 'passwordControl/constraintSettings'],
+            'password-control/history' => ['action' => 'passwordControl/historySettings'],
+            'password-control/expiration' => ['action' => 'passwordControl/expirationSettings'],
+            'password-control/emails' => ['action' => 'passwordControl/emailsSettings'],
         ];
     }
 }

@@ -2,14 +2,14 @@
 
 namespace Craft;
 
-class PasswordManagerService extends BaseApplicationComponent
+class PasswordControlService extends BaseApplicationComponent
 {
     /**
      * Setup
      */
     public function init()
     {
-        $this->_plugin = craft()->plugins->getPlugin('passwordManager');
+        $this->_plugin = craft()->plugins->getPlugin('passwordControl');
     }
 
     public function getSettings()

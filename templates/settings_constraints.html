@@ -1,11 +1,11 @@
-{% extends 'passwordmanager/_layout' %}
+{% extends 'passwordcontrol/_layout' %}
 
 {% set selectedNavItem = 'constraints' %}
 
 {% block content %}
 
 <form id="settings-form" method="post" class="centered" accept-charset="UTF-8" data-saveshortcut>
-    <input type="hidden" name="action" value="passwordManager/saveSettings">
+    <input type="hidden" name="action" value="passwordControl/saveSettings">
     {{ getCsrfInput() }}
 
     <h2>{{ 'Password Constraints'|t }}</h2>
