@@ -3,14 +3,19 @@
 
 {% set title = "Password Manager"|t %}
 
+{% set crumbs = [
+{ label: "Password Manager"|t, url: url('password-manager') }
+] %}
+
 {% if not currentUser.admin %}
 {% exit 404 %}
 {% endif %}
 
 {% set navItems = {
-settings: { label: "General Settings"|t, url: url('password-manager') },
-constraints: { label: "Password Constraints"|t, url: url('password-manager/constraints') },
-expiration: { label: "Password Expiration"|t, url: url('password-manager/expiration') },
+settings: { label: "General"|t, url: url('password-manager') },
+constraints: { label: "Constraints"|t, url: url('password-manager/constraints') },
+history: { label: "History"|t, url: url('password-manager/history') },
+expiration: { label: "Expiration"|t, url: url('password-manager/expiration') },
 emails: { label: "Emails"|t, url:    url('password-manager/emails') }
 } %}
 

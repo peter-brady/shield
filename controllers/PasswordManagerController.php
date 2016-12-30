@@ -37,6 +37,14 @@ class PasswordManagerController extends BaseController
         $this->renderTemplate('passwordmanager/settings_emails', array('settings' => $settings));
     }
 
+    public function actionHistorySettings()
+    {
+        $plugin = craft()->plugins->getPlugin('passwordmanager');
+        $settings = $plugin->getSettings();
+
+        $this->renderTemplate('passwordmanager/settings_history', array('settings' => $settings));
+    }
+
     /**
      * Saves the system user settings.
      *

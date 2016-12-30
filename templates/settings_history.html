@@ -1,0 +1,15 @@
+{% extends 'passwordmanager/_layout' %}
+
+{% set selectedNavItem = 'history' %}
+
+{% block content %}
+
+<form id="settings-form" method="post" class="centered" accept-charset="UTF-8" data-saveshortcut>
+    <input type="hidden" name="action" value="passwordManager/saveSettings">
+    {{ getCsrfInput() }}
+
+    <h2>{{ 'Password History'|t }}</h2>
+    <p>{{ 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Peccant depravare chaere spe timeam possimus, omne, voluptatem gustare quamque videantur existimare retinere petat detractio. Mucius efficiendi impedit dicent gaudeat expetendum videntur invitat, possent meminerimus. Multitudinem necessarius.'|t }}</p>
+    <hr>
+</form>
+{% endblock %}

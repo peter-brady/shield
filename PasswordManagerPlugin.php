@@ -61,6 +61,7 @@ class PasswordManagerPlugin extends BasePlugin
         return [
             'password-manager' => ['action' => 'passwordManager/settings'],
             'password-manager/constraints' => ['action' => 'passwordManager/constraintSettings'],
+            'password-manager/history' => ['action' => 'passwordManager/historySettings'],
             'password-manager/expiration' => ['action' => 'passwordManager/expirationSettings'],
             'password-manager/emails' => ['action' => 'passwordManager/emailsSettings'],
         ];
