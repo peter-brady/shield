@@ -10,15 +10,11 @@
     {{ getCsrfInput() }}
 
     <h2>{{ 'Password Constraints'|t }}</h2>
-    <p>{{ 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Peccant depravare chaere spe timeam possimus, omne, voluptatem gustare quamque videantur existimare retinere petat detractio. Mucius efficiendi impedit dicent gaudeat expetendum videntur invitat, possent meminerimus. Multitudinem necessarius.'|t }}</p>
+    <p>{{ 'Password constraints define the conditions a user password needs to meet before the password is accepted.'|t }}</p>
+    <p>{{ 'Setting a value in one of the constraint fields below activates that constraint. Leaving a field blank results in that constraint being ignored.'|t }}</p>
+    <p>{{ "Example: setting the 'Length' constraint to 8, the 'Uppercase' constraint to 1, and the 'Punctuation' constraint to 1 means that a user password must have at least 8 characters with at least one uppercase letter and at least 1 punctuation character before it is accepted."|t }}</p>
+    <p>{{ "Note: After setting constraint values, it's a good idea to test the constraints in the 'Test' password field below before enabling constraints for your users."|t }}</p>
     <hr>
-
-    {{ forms.lightswitchField({
-    label: 'Enable Password Contraints'|t,
-    instructions: 'Instructions',
-    name: 'enabled',
-    on: settings.enabled,
-    }) }}
 
     {{ forms.textField({
     label: 'Length'|t,
@@ -72,6 +68,25 @@
     maxlength: 2,
     value: settings.constraint_numbers,
     instructions: 'The password must contain the specified minimum number of numbers.'|t
+    }) }}
+
+    <hr>
+
+    {{ forms.textField({
+    label: 'Test Constraints'|t,
+    name: 'constraint_test',
+    size: 30,
+    value: '',
+    instructions: 'Type various combinations of password into the following field to test the constraints above.'|t
+    }) }}
+
+    <hr>
+
+    {{ forms.lightswitchField({
+    label: 'Enabled'|t,
+    instructions: 'Enable these password constraints for your users.',
+    name: 'enabled',
+    on: settings.enabled,
     }) }}
 
     <hr>
