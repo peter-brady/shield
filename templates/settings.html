@@ -57,6 +57,21 @@
     on: settings.enabled_cli,
     }) }}
 
+    {{ forms.textareaField({
+    label: "Paths"|t,
+    name: 'paths',
+    instructions: "Shield protection can be added to specific parts of your site by adding their paths here. Enter one path per line. The * character is a wildcard. Example paths are blog for the blog page and blog/* for every personal blog. / is the homepage."|t,
+    rows: 10,
+    value: settings.paths,
+    }) }}
+
+    {{ forms.textField({
+    label: "Text"|t,
+    name: 'text_unauthorised',
+    instructions: "Text to display whensomebody cancels the authentication dialog."|t,
+    value: settings.text_unauthorised,
+    }) }}
+
     <hr>
 
     <div class="buttons">
