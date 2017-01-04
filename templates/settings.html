@@ -1,7 +1,67 @@
-{% extends 'passwordcontrol/_layout' %}
+{% extends "_layouts/cp" %}
 
-{% set selectedNavItem = 'settings' %}
+{% import "_includes/forms" as forms %}
+
+{% set title = "Shield"|t %}
+
+{% set crumbs = [
+{ label: "Shield"|t, url: url('shield') }
+] %}
+
+{% set cpPath = craft.shield.foo %}
+
+{% if not currentUser.admin %}
+{% exit 404 %}
+{% endif %}
 
 {% block content %}
+
+<form id="settings-form" method="post" class="centered" accept-charset="UTF-8" data-saveshortcut>
+    <input type="hidden" name="action" value="shield/save">
+    {{ getCsrfInput() }}
+
+    {{ forms.textField({
+    label: 'Username'|t,
+    name: 'name',
+    size: 16,
+    value: settings.name ? settings.name : '',
+    instructions: ''|t
+    }) }}
+
+    {{ forms.textField({
+    label: 'Password'|t,
+    name: 'pass',
+    size: 16,
+    value: settings.pass ? settings.pass : '',
+    instructions: ''|t
+    }) }}
+
+	{{ forms.lightswitchField({
+    label: 'Sitewide'|t,
+    instructions: 'Enable if you want the entire site protecting by this shield.'|t,
+    name: 'enabled_sitewide',
+    on: settings.enabled_sitewide,
+    }) }}
+
+    {{ forms.lightswitchField({
+    label: 'Control Panel'|t,
+    instructions: 'Enable if you want the Control Panel protected by this shield at /' ~ cpPath ~ '.',
+    name: 'enabled_cp',
+    on: settings.enabled_cp,
+    }) }}
+
+    {{ forms.lightswitchField({
+    label: 'Console'|t,
+    instructions: "Enable if you want console commands protected by this shield."|t,
+    name: 'enabled_cli',
+    on: settings.enabled_cli,
+    }) }}
+
+    <hr>
+
+    <div class="buttons">
+        <input type="submit" class="btn submit" value="{{ 'Save'|t }}">
+    </div>
+</form>
 
 {% endblock %}
