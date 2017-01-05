@@ -38,14 +38,14 @@
 
 	{{ forms.lightswitchField({
     label: 'Sitewide'|t,
-    instructions: 'Enable if you want the entire site protecting by this shield.'|t,
+    instructions: 'Shield the entire site, including the Control Panel.'|t,
     name: 'enabled_sitewide',
     on: settings.enabled_sitewide,
     }) }}
 
     {{ forms.lightswitchField({
     label: 'Control Panel'|t,
-    instructions: 'Enable if you want the Control Panel protected by this shield at /' ~ cpPath ~ '.',
+    instructions: 'Shield the Control Panel at /' ~ cpPath ~ '.'|t,
     name: 'enabled_cp',
     on: settings.enabled_cp,
     }) }}
@@ -53,7 +53,7 @@
     {{ forms.textareaField({
     label: "Paths"|t,
     name: 'paths',
-    instructions: "Shield protection can be added to specific parts of your site by adding their paths here. Enter one path per line. The * character is a wildcard. Example paths are blog for the blog page and blog/* for every personal blog. / is the homepage."|t,
+    instructions: "Shield specific pages and/or sections by adding the paths here. Enter one path per line. The * character is a wildcard. Example paths are news for the news section and news/* for every personal blog, depending on the slug patterns used. / is the homepage."|t,
     rows: 10,
     value: settings.paths,
     }) }}
@@ -61,7 +61,7 @@
     {{ forms.textField({
     label: "Text"|t,
     name: 'text_unauthorised',
-    instructions: "Text to display whensomebody cancels the authentication dialog."|t,
+    instructions: "Text to display when a user cancels the shield authentication dialog."|t,
     value: settings.text_unauthorised,
     }) }}
 

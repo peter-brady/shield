@@ -92,18 +92,22 @@ class ShieldPlugin extends BasePlugin
         // Don't do anything unless we have a username
         // and a password and this request is not a 
         // console request. 
-        if(!$settings->name || !$settings->pass || craft()->shield->_isConsoleRequest())
+        if(!$settings->name || !$settings->pass || craft()->isConsole())
         {
             return;
         }
 
-        // If the sitewide shield is enabled, check if we
-        // need to present a HTTP Auth challenge. Then return, as
+        // If the sitewide shield is enabled, check to see
+        // if we shoul present a HTTP Auth challenge. Then return, as
         // none of the other shield need apply.
         if(craft()->shield->_shieldSitewide())
         {
           return;
         }
+
+        // If the Control Panel shield is enabled, check to see
+        // if we should present a HTTP Auth challenge. 
+        craft()->shield->_shieldCp();
 
 
     }
