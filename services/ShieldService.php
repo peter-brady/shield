@@ -20,7 +20,7 @@ class ShieldService extends BaseApplicationComponent
 	 * [getSettings description]
 	 * @return [type] [description]
 	 */
-	function getSettings()
+	public function getSettings()
 	{
 		return $this->_settings;	
 	}
@@ -29,7 +29,7 @@ class ShieldService extends BaseApplicationComponent
 	 * [_shieldPassed description]
 	 * @return [type] [description]
 	 */
-	function _shieldPassed()
+	public function _shieldPassed()
 	{
 		if (
 			!empty($_SERVER['PHP_AUTH_USER'])
@@ -45,7 +45,7 @@ class ShieldService extends BaseApplicationComponent
 	 * [_shieldFailed description]
 	 * @return [type] [description]
 	 */
-	function _shieldFailed()
+	public function _shieldFailed()
 	{
 		$print = null;
 		$name = $this->_settings->name;
@@ -61,7 +61,7 @@ class ShieldService extends BaseApplicationComponent
 	 * 
 	 * @return bool true if Shield settings are set to 'Sitewide enabled'. 
 	 */
-	function _shieldSitewide()
+	public function _shieldSitewide()
 	{
 		if($this->_settings->enabled_sitewide)
 		{
@@ -77,7 +77,7 @@ class ShieldService extends BaseApplicationComponent
 	/**
 	 * 
 	 */
-	function _shieldControlPanel()
+	public function _shieldControlPanel()
 	{
 		if($this->_settings->enabled_control_panel && craft()->request->isCpRequest())
 		{
@@ -93,7 +93,7 @@ class ShieldService extends BaseApplicationComponent
 	/**
 	 * 
 	 */
-	function _shieldFrontEnd()
+	public function _shieldFrontEnd()
 	{
 		if($this->_settings->enabled_front_end &&  craft()->request->isSiteRequest())
 		{
@@ -109,7 +109,7 @@ class ShieldService extends BaseApplicationComponent
 	/**
 	 * 
 	 */
-	function _shieldPaths()
+	public function _shieldPaths()
 	{
 		if($this->_settings->enabled_paths && $this->_settings->paths)
 		{
@@ -138,7 +138,7 @@ class ShieldService extends BaseApplicationComponent
 		}
 	}
 
-	public function _pathPatternMatch($path, $patterns)
+	private function _pathPatternMatch($path, $patterns)
 	{
 
 		$to_replace = array(

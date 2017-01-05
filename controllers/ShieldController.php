@@ -9,7 +9,7 @@ class ShieldController extends BaseController
     /**
      *
      */
-    function init()
+    public function init()
     {
         $this->_settings = craft()->shield->getSettings();
     }
