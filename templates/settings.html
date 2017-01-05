@@ -50,13 +50,6 @@
     on: settings.enabled_cp,
     }) }}
 
-    {{ forms.lightswitchField({
-    label: 'Console'|t,
-    instructions: "Enable if you want console commands protected by this shield."|t,
-    name: 'enabled_console',
-    on: settings.enabled_console,
-    }) }}
-
     {{ forms.textareaField({
     label: "Paths"|t,
     name: 'paths',

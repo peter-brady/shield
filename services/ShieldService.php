@@ -57,6 +57,19 @@ class ShieldService extends BaseApplicationComponent
 	}
 
 	/**
+	 * Detects whether the current script is running in a command-line environment.
+	 */
+	function _isConsoleRequest() {
+	  if (!isset($_SERVER['SERVER_SOFTWARE']) && (php_sapi_name() == 'cli' || (is_numeric($_SERVER['argc']) && $_SERVER['argc'] > 0)))
+	  {
+
+	  	return true;
+	  }
+
+	  return false;
+	}
+
+	/**
 	 * _isSitewideEnabled
 	 * 
 	 * @return bool true if Shield settings are set to 'Sitewide enabled'. 
@@ -72,35 +85,5 @@ class ShieldService extends BaseApplicationComponent
 
 	        $this->_shieldFailed();
         }
-	}
-
-	/**
-	 * _isCpEnabled
-	 * 
-	 * @return bool true if Shield settings are set to 'Control Panel enabled'.
-	 */
-	function _cpTriggered()
-	{
-		return false;	
-	}
-
-	/**
-	 * _isCliEnabled
-	 * 
-	 * @return bool true if Shield settings are set to 'Console enabled'.
-	 */
-	function _cliTriggered()
-	{
-		return false;
-	}
-
-	/**
-	 * _isPathsEnabled
-	 * 
-	 * @return bool true if Shield settings has paths present.
-	 */
-	function _pathsTriggered()
-	{
-		return false;
 	}
 }

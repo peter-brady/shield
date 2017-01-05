@@ -40,7 +40,6 @@ class ShieldController extends BaseController
         $settings['pass'] = craft()->request->getPost('pass');
         $settings['enabled_sitewide'] = craft()->request->getPost('enabled_sitewide');
         $settings['enabled_cp'] = craft()->request->getPost('enabled_cp');
-        $settings['enabled_console'] = craft()->request->getPost('enabled_console');
         $settings['paths'] = craft()->request->getPost('paths');
         $settings['text_unauthorised'] = craft()->request->getPost('text_unauthorised');
         

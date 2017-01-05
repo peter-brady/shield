@@ -47,7 +47,6 @@ class ShieldPlugin extends BasePlugin
             'pass' => array(AttributeType::String, 'default' => ''),
             'enabled_sitewide' => array(AttributeType::Bool, 'default' => 0),
             'enabled_cp' => array(AttributeType::Bool, 'default' => 0),
-            'enabled_console' => array(AttributeType::Bool, 'default' => 0),
             'paths' => array(AttributeType::Mixed, 'default' => ''),
             'text_unauthorised' => array(AttributeType::String, array('default' => '')),
         );
@@ -87,25 +86,25 @@ class ShieldPlugin extends BasePlugin
      */
     public function init()
     {
-
         // Get the Shield settings.
         $settings = $this->getSettings();
 
         // Don't do anything unless we have a username
-        // and a password. 
-        if(!$settings->name || !$settings->pass)
+        // and a password and this request is not a 
+        // console request. 
+        if(!$settings->name || !$settings->pass || craft()->shield->_isConsoleRequest())
         {
             return;
         }
-        
-        //
-        //
-        //
+
+        // If the sitewide shield is enabled, check if we
+        // need to present a HTTP Auth challenge. Then return, as
+        // none of the other shield need apply.
         if(craft()->shield->_shieldSitewide())
         {
           return;
         }
 
-        
+
     }
 }
