@@ -5,7 +5,7 @@ namespace Craft;
 class ShieldVariable
 {
 
-	public function foo()
+	public function getCpTrigger()
 	{
 		return craft()->config->get('cpTrigger');
 	}

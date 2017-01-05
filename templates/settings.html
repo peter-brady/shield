@@ -8,7 +8,7 @@
 { label: "Shield"|t, url: url('shield') }
 ] %}
 
-{% set cpPath = craft.shield.foo %}
+{% set cpPath = craft.shield.getCpTrigger %}
 
 {% if not currentUser.admin %}
 {% exit 404 %}
@@ -53,8 +53,8 @@
     {{ forms.lightswitchField({
     label: 'Console'|t,
     instructions: "Enable if you want console commands protected by this shield."|t,
-    name: 'enabled_cli',
-    on: settings.enabled_cli,
+    name: 'enabled_console',
+    on: settings.enabled_console,
     }) }}
 
     {{ forms.textareaField({
