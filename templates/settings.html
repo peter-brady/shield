@@ -45,9 +45,16 @@
 
     {{ forms.lightswitchField({
     label: 'Control Panel'|t,
-    instructions: 'Shield the Control Panel at /' ~ cpPath ~ '.'|t,
-    name: 'enabled_cp',
-    on: settings.enabled_cp,
+    instructions: 'Shield the Control Panel pages at and beneath /' ~ cpPath ~ '.'|t,
+    name: 'enabled_control_panel',
+    on: settings.enabled_control_panel,
+    }) }}
+
+    {{ forms.lightswitchField({
+    label: 'Front End'|t,
+    instructions: 'Shield the front-end pages.'|t,
+    name: 'enabled_front_end',
+    on: settings.enabled_front_end,
     }) }}
 
     {{ forms.textareaField({

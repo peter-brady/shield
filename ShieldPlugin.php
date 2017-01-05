@@ -46,7 +46,8 @@ class ShieldPlugin extends BasePlugin
             'name' => array(AttributeType::String, 'default' => ''),
             'pass' => array(AttributeType::String, 'default' => ''),
             'enabled_sitewide' => array(AttributeType::Bool, 'default' => 0),
-            'enabled_cp' => array(AttributeType::Bool, 'default' => 0),
+            'enabled_control_panel' => array(AttributeType::Bool, 'default' => 0),
+            'enabled_front_end' => array(AttributeType::Bool, 'default' => 0),
             'paths' => array(AttributeType::Mixed, 'default' => ''),
             'text_unauthorised' => array(AttributeType::String, array('default' => '')),
         );
@@ -98,17 +99,26 @@ class ShieldPlugin extends BasePlugin
         }
 
         // If the sitewide shield is enabled, check to see
-        // if we shoul present a HTTP Auth challenge. Then return, as
-        // none of the other shield need apply.
+        // if we should present a HTTP Auth challenge for this
+        // page request. Then return, as none of the other shield need apply.
         if(craft()->shield->_shieldSitewide())
         {
           return;
         }
 
         // If the Control Panel shield is enabled, check to see
-        // if we should present a HTTP Auth challenge. 
-        craft()->shield->_shieldCp();
+        // if we should present a HTTP Auth challenge for this
+        // page request. 
+        craft()->shield->_shieldControlPanel();
 
+        // If the Front End shield is enabled, check to see
+        // if we should present a HTTP Auth challenge for this
+        // page request. 
+        craft()->shield->_shieldFrontEnd();
+
+        // If path need the shield, check to see if we should
+        // present a HTTP Auth challenge for this page request. 
+        craft()->shield->_shieldPaths();
 
     }
 }

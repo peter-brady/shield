@@ -77,9 +77,9 @@ class ShieldService extends BaseApplicationComponent
 	/**
 	 * 
 	 */
-	function _shieldCp()
+	function _shieldControlPanel()
 	{
-		if($this->_settings->enabled_cp &&  craft()->request->isCpRequest())
+		if($this->_settings->enabled_control_panel && craft()->request->isCpRequest())
 		{
 			if ($this->_shieldPassed())
 			{
@@ -87,6 +87,33 @@ class ShieldService extends BaseApplicationComponent
 	        }
 
 	        $this->_shieldFailed();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	function _shieldFrontEnd()
+	{
+		if($this->_settings->enabled_front_end &&  craft()->request->isSiteRequest())
+		{
+			if ($this->_shieldPassed())
+			{
+	        	return true;
+	        }
+
+	        $this->_shieldFailed();
+		}
+	}
+
+	/**
+	 * 
+	 */
+	function _shieldPaths()
+	{
+		if($this->_settings->paths)
+		{
+
 		}
 	}
 }
