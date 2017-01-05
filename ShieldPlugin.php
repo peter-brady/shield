@@ -48,6 +48,7 @@ class ShieldPlugin extends BasePlugin
             'enabled_sitewide' => array(AttributeType::Bool, 'default' => 0),
             'enabled_control_panel' => array(AttributeType::Bool, 'default' => 0),
             'enabled_front_end' => array(AttributeType::Bool, 'default' => 0),
+            'enabled_paths' => array(AttributeType::Bool, 'default' => 0),
             'paths' => array(AttributeType::Mixed, 'default' => ''),
             'text_unauthorised' => array(AttributeType::String, array('default' => '')),
         );
@@ -87,6 +88,8 @@ class ShieldPlugin extends BasePlugin
      */
     public function init()
     {
+        parent::init();
+
         // Get the Shield settings.
         $settings = $this->getSettings();
 
@@ -120,5 +123,14 @@ class ShieldPlugin extends BasePlugin
         // present a HTTP Auth challenge for this page request. 
         craft()->shield->_shieldPaths();
 
+    }
+
+    /**
+     *
+     */
+    protected function includeResources()
+    {
+        $jsFile = 'javascripts/reasons.js';
+        craft()->templates->includeJsResource('shield/js/foo.js');
     }
 }

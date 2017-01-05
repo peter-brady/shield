@@ -38,6 +38,7 @@
 
 	{{ forms.lightswitchField({
     label: 'Sitewide'|t,
+    id: 'enabled_sitewide',
     instructions: 'Shield the entire site, including the Control Panel.'|t,
     name: 'enabled_sitewide',
     on: settings.enabled_sitewide,
@@ -45,7 +46,8 @@
 
     {{ forms.lightswitchField({
     label: 'Control Panel'|t,
-    instructions: 'Shield the Control Panel pages at and beneath /' ~ cpPath ~ '.'|t,
+    id: 'enabled_control_panel',
+    instructions: 'Shield the Control Panel pages at /' ~ cpPath ~ ' and ' ~ cpPath ~ '/*'|t,
     name: 'enabled_control_panel',
     on: settings.enabled_control_panel,
     }) }}
@@ -57,18 +59,27 @@
     on: settings.enabled_front_end,
     }) }}
 
-    {{ forms.textareaField({
+    {{ forms.lightswitchField({
     label: "Paths"|t,
-    name: 'paths',
-    instructions: "Shield specific pages and/or sections by adding the paths here. Enter one path per line. The * character is a wildcard. Example paths are news for the news section and news/* for every personal blog, depending on the slug patterns used. / is the homepage."|t,
-    rows: 10,
-    value: settings.paths,
+    name: 'enabled_paths',
+    instructions: "Shield specific pages and/or sections by adding the URL paths here. Enter one path per line. The * character is a wildcard. Example paths are news for the news section and news/* for every personal blog, depending on the slug patterns used. / is the homepage."|t,
+    name: 'enabled_paths',
+    on: settings.enabled_paths,
+    toggle: 'paths',
     }) }}
+
+    <div id="paths" class="{% if not settings.enabled_paths %}hidden{% endif %}">
+        {{ forms.textareaField({
+        rows: 10,
+        name: 'paths',
+        value: settings.paths,
+        }) }}
+    </div>
 
     {{ forms.textField({
     label: "Text"|t,
     name: 'text_unauthorised',
-    instructions: "Text to display when a user cancels the shield authentication dialog."|t,
+    instructions: "The text to display if the user cancels the shield authentication dialog. If no text is provided, the user will simply see a blank page."|t,
     value: settings.text_unauthorised,
     }) }}
 

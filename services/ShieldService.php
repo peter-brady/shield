@@ -111,9 +111,49 @@ class ShieldService extends BaseApplicationComponent
 	 */
 	function _shieldPaths()
 	{
-		if($this->_settings->paths)
+		if($this->_settings->enabled_paths && $this->_settings->paths)
 		{
+			if (craft()->request->isCpRequest()) {
+				$path = craft()->config->get('cpTrigger') . '/' . craft()->request->getPath();
+			} else {
+				$path = craft()->request->getPath();
+			}
 
+			if(!$path)
+			{
+				$path = '/';
+			}
+
+			$patterns = $this->_settings->paths;
+			
+			if($this->_pathPatternMatch($path, $patterns))
+			{
+				if ($this->_shieldPassed())
+			{
+	        	return true;
+	        }
+
+	        	$this->_shieldFailed();
+			}
 		}
+	}
+
+	public function _pathPatternMatch($path, $patterns)
+	{
+
+		$to_replace = array(
+	      '/(\r\n?|\n)/', // newlines
+	      '/\\\\\*/', // asterisks
+	    );
+
+	    $replacements = array(
+	      '|',
+	      '.*',
+	     );
+
+	    $patterns_quoted = preg_quote($patterns, '/');
+	    $regexps[$patterns] = '/^(' . preg_replace($to_replace, $replacements, $patterns_quoted) . ')$/';
+
+	    return (bool) preg_match($regexps[$patterns], $path);
 	}
 }

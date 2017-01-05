@@ -41,6 +41,7 @@ class ShieldController extends BaseController
         $settings['enabled_sitewide'] = craft()->request->getPost('enabled_sitewide');
         $settings['enabled_control_panel'] = craft()->request->getPost('enabled_control_panel');
         $settings['enabled_front_end'] = craft()->request->getPost('enabled_front_end');
+        $settings['enabled_paths'] = craft()->request->getPost('enabled_paths');
         $settings['paths'] = craft()->request->getPost('paths');
         $settings['text_unauthorised'] = craft()->request->getPost('text_unauthorised');
         
