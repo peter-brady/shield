@@ -1,12 +1,16 @@
 <?php
 
+/**
+ * 
+ */
+
 namespace Craft;
 
 
 class ShieldPlugin extends BasePlugin
 {
     /**
-     * @return null|string
+     * @return string
      */
     public function getName()
     {
@@ -83,27 +87,29 @@ class ShieldPlugin extends BasePlugin
     }
 
     /**
-     * [init description]
-     * @return [type] [description]
+     * Checks if the the shield is required for this page request.
      */
     public function init()
     {
         parent::init();
 
-        // Get the Shield settings.
-        $settings = $this->getSettings();
+        /* Set the Shield settings to a variable. */
+        $settings = $this->getSettings(); // !!! Check to see if I need this !!!
 
-        // Don't do anything unless we have a username
-        // and a password and this request is not a 
-        // console request. 
+        /**
+         * Return if we don't have have a username, a 
+         * password AND this request is not a console request. 
+         */
         if(!$settings->name || !$settings->pass || craft()->isConsole())
         {
             return;
         }
 
-        // If the sitewide shield is enabled, check to see
-        // if we should present a HTTP Auth challenge for this
-        // page request. Then return, as none of the other shield need apply.
+        /**
+         * If the sitewide shield is enabled, check to see if we should
+         * present a HTTP Auth challenge for this page request.
+         * If so, return, as none of the other shields need apply.
+         */
         if(craft()->shield->_shieldSitewide())
         {
           return;
@@ -114,23 +120,16 @@ class ShieldPlugin extends BasePlugin
         // page request. 
         craft()->shield->_shieldControlPanel();
 
-        // If the Front End shield is enabled, check to see
-        // if we should present a HTTP Auth challenge for this
-        // page request. 
+        /**
+         * If the Front End shield is enabled, check to see if we
+         * should present a HTTP Auth challenge for this page request.
+         */
         craft()->shield->_shieldFrontEnd();
 
-        // If path need the shield, check to see if we should
-        // present a HTTP Auth challenge for this page request. 
+        /**
+         * If path shields are enable, check to see if we should
+         * present a HTTP Auth challenge for this page request. 
+         */
         craft()->shield->_shieldPaths();
-
-    }
-
-    /**
-     *
-     */
-    protected function includeResources()
-    {
-        $jsFile = 'javascripts/reasons.js';
-        craft()->templates->includeJsResource('shield/js/foo.js');
     }
 }

@@ -50,7 +50,7 @@ class ShieldService extends BaseApplicationComponent
 		$print = null;
 		$name = $this->_settings->name;
 		$pass = $this->_settings->pass;
-		header(sprintf('WWW-Authenticate: Basic realm="%s"', strtr($print, array('[name]' => $name, '[pass]' => $pass))));
+		header(sprintf('WWW-Authenticate: Basic realm="%s"', strtr($print, array('[name]' => $name, '[pass]' => $pass)))); // !!! Check to see if I need to change this !!!
 		header('HTTP/1.0 401 Unauthorized');
 		echo $this->_settings->text_unauthorised;
 		exit;
@@ -59,7 +59,7 @@ class ShieldService extends BaseApplicationComponent
 	/**
 	 * _isSitewideEnabled
 	 * 
-	 * @return bool true if Shield settings are set to 'Sitewide enabled'. 
+	 * @return bool True if Shield settings are set to 'Sitewide enabled'. 
 	 */
 	public function _shieldSitewide()
 	{
@@ -113,31 +113,53 @@ class ShieldService extends BaseApplicationComponent
 	{
 		if($this->_settings->enabled_paths && $this->_settings->paths)
 		{
+			/**
+			 * Get the path for this page request.
+			 *
+			 * If it's a Control Panel request, prepend the cpTrigger
+			 * value to the path. If not, just get the path.
+			 */
 			if (craft()->request->isCpRequest()) {
 				$path = craft()->config->get('cpTrigger') . '/' . craft()->request->getPath();
 			} else {
 				$path = craft()->request->getPath();
 			}
 
+			/**
+			 * The path returned for the homepage is an empty string.
+			 *
+			 * If we get this, make it a / so admins have use / is the 
+			 * path textarea on the Shield settings page.
+			 */
 			if(!$path)
 			{
 				$path = '/';
 			}
 
+			/** Get the paths the admin entered in the Shield settings page. */
 			$patterns = $this->_settings->paths;
 			
+			/**
+			 * Match this page request against the patterns. If we get a
+			 * match, let the user continue. Else, invoke the shield.
+			 */
 			if($this->_pathPatternMatch($path, $patterns))
 			{
 				if ($this->_shieldPassed())
 			{
 	        	return true;
 	        }
-
 	        	$this->_shieldFailed();
 			}
 		}
 	}
 
+	/**
+	 * 
+	 * @param  string $path     The current page path.
+	 * @param  string $patterns The path settings from the Shield settings page.
+	 * @return bool             True if the pattern patches. False if not.
+	 */
 	private function _pathPatternMatch($path, $patterns)
 	{
 
